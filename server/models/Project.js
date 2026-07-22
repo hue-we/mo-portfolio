@@ -6,7 +6,8 @@ const projectSchema = new mongoose.Schema(
     description: { type: String, default: '' },
     year: { type: String, default: '' },
     tags: { type: [String], default: [] },
-    link: { type: String, default: '' },
+    liveLink: { type: String, default: '' },
+    caseStudyPdf: { type: String, default: '' },
     slug: { type: String, default: '' },
     order: { type: Number, default: 0 }
   },

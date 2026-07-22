@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const empty = { title: '', description: '', year: '', tags: '', link: '', slug: '' }
+const empty = { title: '', description: '', year: '', tags: '', liveLink: '', caseStudyPdf: '', slug: '' }
 
 export default function ProjectForm({ initial, onSave, onCancel }) {
   const [form, setForm] = useState(initial ? { ...initial, tags: initial.tags?.join(', ') || '' } : empty)
@@ -24,8 +24,13 @@ export default function ProjectForm({ initial, onSave, onCancel }) {
         <Field label="Description" value={form.description} onChange={(v) => update('description', v)} textarea />
         <div className="grid grid-cols-2 gap-4">
           <Field label="Year" value={form.year} onChange={(v) => update('year', v)} />
-          <Field label="Link (optional)" value={form.link} onChange={(v) => update('link', v)} />
+          <Field label="Live link (optional)" value={form.liveLink} onChange={(v) => update('liveLink', v)} />
         </div>
+        <Field
+          label="Case study PDF path (optional)"
+          value={form.caseStudyPdf}
+          onChange={(v) => update('caseStudyPdf', v)}
+        />
         <Field label="Tags (comma separated)" value={form.tags} onChange={(v) => update('tags', v)} />
         <div>
           <Field

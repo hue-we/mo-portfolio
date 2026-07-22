@@ -9,7 +9,7 @@ const fallback = [
     description: 'React, Node, and MongoDB — with a working admin panel behind it.',
     year: '2026',
     tags: ['React', 'Node.js', 'MongoDB'],
-    link: '',
+    liveLink: '',
     slug: 'mo-portfolio-site'
   },
   {
@@ -18,7 +18,7 @@ const fallback = [
     description: 'Live client site for an events business.',
     year: '2024',
     tags: ['React', 'Netlify'],
-    link: 'https://premierattractionevents.netlify.app'
+    liveLink: 'https://premierattractionevents.netlify.app'
   },
   {
     _id: 'fallback-2',
@@ -26,7 +26,8 @@ const fallback = [
     description: 'Speculative build for a Muldersdrift restaurant, booking backend included.',
     year: '2026',
     tags: ['Node', 'Express', 'SQLite'],
-    link: '/case-study-harvested-flavour.pdf'
+    liveLink: 'https://harvestedflavour.netlify.app',
+    caseStudyPdf: '/case-study-harvested-flavour.pdf'
   },
   {
     _id: 'fallback-3',
@@ -34,7 +35,8 @@ const fallback = [
     description: 'Second-hand game marketplace — ASP.NET Core 8, React, MySQL, JWT auth.',
     year: '2026',
     tags: ['ASP.NET Core', 'React', 'MySQL', 'JWT'],
-    link: '/case-study-cartridge-console.pdf'
+    liveLink: 'https://cartridge-console.netlify.app',
+    caseStudyPdf: '/case-study-cartridge-console.pdf'
   }
 ]
 
@@ -65,35 +67,60 @@ export default function Projects() {
 
       <div className="flex flex-col">
         {projects.map((p, i) => (
-          <motion.a
+          <motion.div
             key={p._id}
-            href={p.slug ? `/work/${p.slug}` : p.link || undefined}
-            target={!p.slug && p.link ? '_blank' : undefined}
-            rel="noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: i * 0.05 }}
-            className={`group flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-6 border-b border-line ${p.slug || p.link ? 'cursor-pointer' : 'cursor-default'}`}
+            className="group flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-6 border-b border-line"
           >
             <span className="font-mono text-muted text-sm w-10 shrink-0">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span className="font-display font-bold text-xl md:text-2xl text-bone group-hover:text-gold transition-colors flex-1">
+
+            <span className="font-display font-bold text-xl md:text-2xl text-bone flex-1">
               {p.title}
-              {p.slug && (
-                <span className="ml-3 align-middle font-mono text-[10px] uppercase tracking-widest text-muted group-hover:text-gold transition-colors">
-                  case study →
-                </span>
-              )}
             </span>
+
             <span className="font-body text-muted text-sm max-w-md">
               {p.description}
             </span>
-            <span className="font-mono text-xs text-gold uppercase tracking-widest shrink-0">
-              {p.year}
-            </span>
-          </motion.a>
+
+            <div className="flex items-center gap-4 shrink-0">
+              {p.liveLink && (
+                <a
+                  href={p.liveLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-mono text-xs uppercase tracking-widest text-bone/80 hover:text-gold transition-colors focus-ring"
+                >
+                  Live →
+                </a>
+              )}
+              {p.slug && (
+                <a
+                  href={`/work/${p.slug}`}
+                  className="font-mono text-xs uppercase tracking-widest text-bone/80 hover:text-gold transition-colors focus-ring"
+                >
+                  Case Study →
+                </a>
+              )}
+              {p.caseStudyPdf && (
+                <a
+                  href={p.caseStudyPdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-mono text-xs uppercase tracking-widest text-bone/80 hover:text-gold transition-colors focus-ring"
+                >
+                  Case Study →
+                </a>
+              )}
+              <span className="font-mono text-xs text-gold uppercase tracking-widest">
+                {p.year}
+              </span>
+            </div>
+          </motion.div>
         ))}
       </div>
 
