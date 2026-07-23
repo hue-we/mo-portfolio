@@ -9,8 +9,20 @@ const entries = [
 ]
 
 const stack = [
-  'React', 'Node.js / Express', 'MongoDB', 'SQL Server / MySQL', 'Python',
-  'C# / .NET', 'Java', 'Angular', 'HTML / CSS / JS'
+  { name: 'React', icon: 'react/react-original' },
+  { name: 'Node.js', icon: 'nodejs/nodejs-original' },
+  { name: 'Express', icon: 'express/express-original', bg: true },
+  { name: 'MongoDB', icon: 'mongodb/mongodb-original' },
+  { name: 'MySQL', icon: 'mysql/mysql-original' },
+  { name: 'SQL Server', icon: 'microsoftsqlserver/microsoftsqlserver-plain' },
+  { name: 'Python', icon: 'python/python-original' },
+  { name: 'C# / .NET', icon: 'csharp/csharp-original' },
+  { name: 'Java', icon: 'java/java-original' },
+  { name: 'Angular', icon: 'angularjs/angularjs-plain' },
+  { name: 'HTML5', icon: 'html5/html5-original' },
+  { name: 'CSS3', icon: 'css3/css3-original' },
+  { name: 'JavaScript', icon: 'javascript/javascript-original' },
+  { name: 'Git', icon: 'git/git-original' }
 ]
 
 export default function Timeline() {
@@ -48,15 +60,33 @@ export default function Timeline() {
           </div>
 
           <div className="mt-14">
-            <p className="font-mono text-muted text-xs uppercase tracking-widest mb-4">stack --list</p>
-            <div className="flex flex-wrap gap-3">
-              {stack.map((s) => (
-                <span
-                  key={s}
-                  className="font-mono text-xs uppercase tracking-wide border border-line rounded-full px-4 py-2 text-bone/80"
+            <p className="font-mono text-muted text-xs uppercase tracking-widest mb-5">stack --list</p>
+            <div className="flex flex-wrap gap-4">
+              {stack.map((s, i) => (
+                <motion.div
+                  key={s.name}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.4, delay: i * 0.03 }}
+                  className="flex flex-col items-center gap-2 w-16"
                 >
-                  {s}
-                </span>
+                  <div
+                    className={`w-12 h-12 flex items-center justify-center rounded-lg border border-line ${
+                      s.bg ? 'bg-bone p-2' : 'bg-transparent'
+                    }`}
+                  >
+                    <img
+                      src={`https://raw.githubusercontent.com/devicons/devicon/master/icons/${s.icon}.svg`}
+                      alt={s.name}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-mono text-[10px] uppercase tracking-wide text-muted text-center leading-tight">
+                    {s.name}
+                  </span>
+                </motion.div>
               ))}
             </div>
           </div>
